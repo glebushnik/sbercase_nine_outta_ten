@@ -200,11 +200,52 @@ By optimizing the platform’s performance and automating key processes, you wil
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- Contributor to **Workstream B — Architecture & Platform Design** (owner: Solution Architect; contributors: Backend Lead, Langflow Engineer, SRE) — PRD §25.3.
+- Contributor to Workstream E (Security & Governance).
+
+### 6.2 Deployment and runtime responsibilities (PRD §25.1)
+Per PRD §25.1, you own specifically: deployment model, runtime operations, observability, reliability, scaling, **isolation**.
+
+### 6.3 Tenant / workspace isolation (PRD §14.3, §21.1)
+Infrastructure must enforce tenant isolation at compute, network, storage, and log boundaries:
+- No shared workers across tenants for tasks handling classified data.
+- Network segmentation between tenants and between control/execution planes.
+- Storage and secret isolation with per-tenant keys where applicable.
+
+### 6.4 Operational scalability (PRD §20.5)
+Infrastructure must support:
+- **Queue-based execution** with per-tenant budgets.
+- **Workers** with auto-scaling and graceful shutdown.
+- **Async jobs** lifecycle (start, heartbeat, cancel, timeout).
+- **Scheduling** for recurring workflows (PRD §12.8).
+- **Checkpointing** for resumable long-running runs.
+- **Caching** where appropriate, without cross-tenant leakage.
+- **Resource budgets** per tenant/workspace.
+- **Observability dashboards** per tenant.
+
+### 6.5 Reliability contract (PRD §14.2)
+Infrastructure provides the substrate for: idempotent execution, retry, timeout handling, partial failure recovery, last-known-good recovery, versioned reproducibility.
+
+### 6.6 Observability (PRD §14.6, §22.3)
+Ship: structured logs, traces, execution lineage, quality metrics pipeline, failure taxonomies, audit and abuse event stream. SLO dashboards must cover p95 execution latency, retry rate, timeout rate, connector failure rate.
+
+### 6.7 Disaster recovery and last-known-good (PRD §14.2)
+- Backups cover control-plane metadata (registry, templates, task specs, audit).
+- Recurring workflow recovery: restore last successful output as fallback.
+- Failover plan covers both planes and preserves tenant isolation during recovery.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 You will collaborate closely with the following teams:
 
 - **Langflow Engineers**: To ensure smooth integration and deployment of Langflow workflows.
-- **Backend Engineers**: To optimize backend services and manage deployments.
-- **Security / Privacy Expert**: To ensure secure infrastructure and compliance with privacy regulations.
+- **Backend Engineers**: To optimize backend services and manage deployments; queues, async, checkpoint storage.
+- **Data / Analytics Engineer**: Scheduled ingestion infrastructure for recurring workflows.
+- **Solution Architect**: Align infrastructure with two-plane architecture and IR persistence.
+- **Security / Privacy Expert**: To ensure secure infrastructure, tenant isolation, and compliance with privacy regulations.
 - **Product Manager**: To ensure the platform meets business and operational goals.

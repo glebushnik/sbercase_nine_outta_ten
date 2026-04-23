@@ -171,7 +171,49 @@ By collaborating with cross-functional teams, you will build AI-driven solutions
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- **Workstream C — Agent/Planner/Evaluator Design** (owner; contributors: Applied Scientist, Backend, Langflow Engineer) — PRD §25.3.
+- Contributor to Workstream D (Validation & Trust).
+
+### 6.2 Hybrid deterministic-agentic architecture (PRD §17)
+Architectural decision: the platform is **neither a single super-agent nor a fully autonomous multi-agent system**. You own the boundary between deterministic and agentic layers:
+
+- **Deterministic layers** (must not depend on LLM judgment):
+  - Registry, Compiler, Validation, Runtime, Delivery, Governance.
+- **Agentic layers** (LLM-driven with guardrails):
+  - Intent understanding, Clarification, Planning, Semantic evaluation, Business-ready report narration.
+
+Why not one agent: fragile, unexplainable, hard to control, poorly validatable, no guarantees on correctness (PRD §17.2).
+Why not full multi-agent by default: complexity, nondeterminism, harder to scale and secure (PRD §17.3).
+
+### 6.3 Core logical components you own (PRD §17.5)
+- **Intent Parser**: NL request → intent, task category, confidence, missing fields.
+- **Clarification Manager**: partial understanding → complete task definition via guided questions.
+- **Policy & Abuse Guard**: request + plan → allow / block / safe alternative / escalation. (Co-owned with Security Engineer.)
+- **Task Spec Builder**: clarified intent → machine-readable task spec (see PRD Appendix A).
+- **Planner Agent**: task spec + registry → high-level workflow blueprint.
+- **Evaluation / Critic**: outputs + spec + traces → quality summary, semantic fit, confidence, evidence coverage.
+- **Report Generator**: evaluated outputs → business-readable report.
+
+### 6.4 Policy & Abuse Guard (PRD §19)
+You co-own with Security. The guard must classify and handle at minimum: content manipulation, prompt injection / jailbreak, unauthorized access attempts, destructive requests, privacy-violating requests, spam / nonsense. Response policy: classify → block → log → refuse safely → escalate on repeat.
+
+### 6.5 Evidence model and low-confidence outputs (PRD §18.4–§18.5)
+Every significant output must, where applicable, carry: evidence examples, counts / coverage, source mapping, confidence signal, limitation note. When confidence is below threshold, do not mask — explain cause and offer actions (refine task, improve source, adjust analysis, request human review, narrow scope).
+
+### 6.6 Task spec contract (PRD Appendix A)
+Task specs must conform to the shape: `task_type`, `objective`, `time_window`, `source`, `outputs`, `dimensions`, `constraints` (`pii_redaction`, `evidence_required`, `policy_guard_enabled`), `schedule`, `confidence_threshold`.
+
+### 6.7 Prompting and system behavior discipline
+- Prompts and system behavior are versioned artifacts with tests.
+- Agentic outputs must pass downstream deterministic validation before influencing state.
+- Never let an agent write directly to execution plane; compiler and registry stand between plan and run.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 As the AI Architect, you will collaborate with the following teams:
 
@@ -179,4 +221,7 @@ As the AI Architect, you will collaborate with the following teams:
 - **Product Manager**: To align AI components with user needs and business requirements.
 - **Backend Engineers**: To deploy AI models and ensure proper integration into the platform.
 - **UX/Product Designer**: To ensure the AI components are presented in an intuitive way.
-- **Data Engineers**: To support the continuous training of AI models with high-quality data.
+- **Evaluation / Applied Scientist**: Co-owner of Evaluator/Critic and confidence framework.
+- **Security Engineer**: Co-owner of Policy & Abuse Guard.
+- **Data / Analytics Engineers**: To support the continuous training of AI models with high-quality data and data quality signals for confidence scoring.
+- **Langflow Engineer**: To ensure agentic outputs compile into valid runtime flows.

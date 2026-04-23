@@ -193,6 +193,61 @@ Your work will directly impact the platform’s ability to scale while ensuring 
 You will collaborate closely with the following teams:
 
 - **Backend Engineers**: To ensure secure data access and encryption across the platform.
-- **Langflow Engineers**: To ensure that workflows and custom components comply with security policies.
+- **Langflow Engineers**: To ensure that workflows and custom components comply with security policies via the approval pipeline.
 - **Product Manager**: To align security and privacy requirements with business needs and regulatory goals.
 - **DevOps**: To ensure secure deployment pipelines and monitoring systems.
+- **AI Architect**: Co-owner of Policy & Abuse Guard (PRD §17.5, §19).
+- **Data / Analytics Engineer**: Data classification and redaction component integration.
+- **Solution Architect**: Secrets, RBAC, tenant isolation baked into architecture.
+
+---
+
+## 7. PRD Alignment
+
+### 7.1 Workstream ownership
+- **Workstream E — Security & Governance** (owner; contributors: Architect, Platform, Admin stakeholders) — PRD §25.3.
+
+### 7.2 Policy & Abuse Guard (PRD §19) — co-owned with AI Architect
+You are the co-owner of the Policy & Abuse Guard. You must classify and handle all abuse classes from PRD §19.2:
+
+- **Content manipulation requests** — "make report look better than it is", "show only positive", "send fake report to leadership".
+- **Prompt injection / jailbreak** — attempts to bypass policies via crafted input.
+- **Unauthorized access attempts** — "dump all PII", access to restricted sources.
+- **Destructive requests** — "delete data/sources" without authorization.
+- **Privacy-violating requests** — leak of PII or classified data.
+- **Spam / nonsense / load abuse** — garbage tasks, load-test abuse.
+
+**Abuse response policy (PRD §19.3):** classify → block policy-violating runs → log event → do not build or run flow → return safe explanation → escalate on repeat offenders.
+
+### 7.3 Secrets vault and rotation (PRD §14.3, §21.1)
+- Secrets live in a central vault with access scoped by role and tenant.
+- **Rotation** is mandatory and automated where possible.
+- Secrets never appear in logs, traces, audit events, or error messages.
+- Safe-mode credential validation (PRD §12.4) runs secrets through the vault without exposing them to agent context.
+
+### 7.4 Connector and custom-component approval pipeline (PRD §13.11, §16.5, §21.1)
+You gate the approval pipeline alongside Architect:
+- Every connector and custom component has **risk classification** and **approval status**.
+- Connectors to new sources require approval before they are available to Planner.
+- Custom components must include: owner, contracts (input/output/config), secrets requirements, tests, versioning, observability hooks, risk classification.
+- Maintain an **approved registry** — Planner composes approved components only by default.
+
+### 7.5 Data classification (PRD §21.2)
+Every registered source and field carries a classification tag (PII / confidential / internal / public). Classification drives: redaction / masking, RBAC / ABAC access decisions, model-usage restrictions by data class, retention rules.
+
+### 7.6 RBAC/ABAC and tenant isolation (PRD §14.3, §21.1)
+- RBAC for user-to-feature; ABAC where attribute-based context (e.g., source classification) matters.
+- Workspace / tenant isolation enforced at data, secrets, components, logs, and audit layers.
+- Action restrictions by role — destructive actions require elevated role plus explicit approved scenario.
+
+### 7.7 Audit and execution lineage (PRD §14.6, §21.1)
+Structured audit events for: task spec creation, plan approval, flow execution, policy decisions, abuse events, admin approvals, credential use. Lineage must be queryable per tenant per time window.
+
+### 7.8 Trust metrics you co-own (PRD §22.4)
+- Abuse detection precision/recall.
+- False-positive block rate.
+- User data access violations.
+
+### 7.9 Risks owned (PRD §24)
+- Risk 5: Security/PII issues — mitigated by this role's policy engine, redaction, RBAC, audit, restricted connectors.
+- Risk 8: Abuse and trolling — mitigated by Policy & Abuse Guard, logging, blocking, escalation path.

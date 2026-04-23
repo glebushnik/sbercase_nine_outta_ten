@@ -203,7 +203,45 @@ Your success will be measured by the platform’s ability to scale, its integrat
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- **Workstream B — Architecture & Platform Design** (owner) — contributors: Backend Lead, Langflow Engineer, SRE. PRD §25.3.
+- Contributor to Workstreams C, E, F.
+
+### 6.2 Two-plane architecture (PRD §15)
+You own the explicit separation between Control Plane and Execution Plane and the boundary contract between them:
+- **Control Plane:** Intent Parser, Clarification Manager, Policy & Abuse Guard, Task Spec Builder, Planner Agent, Capability Registry, Workflow Compiler, Validation Engine, Evaluation/Critic Engine, Template Service, Versioning & Metadata, Audit/Governance.
+- **Execution Plane:** Langflow Runtime, standard + approved custom components, Data Connectors, Subflows, Schedulers, Delivery Nodes, Queues/Workers, Storage/Secrets/Runtime Logs.
+- Langflow is the orchestration substrate of the execution plane — **not the entire system** (PRD §16.1–§16.3).
+
+### 6.3 Runtime-neutral Intermediate Representation (PRD §20.4)
+You own the IR specification. The IR **must capture**:
+- nodes,
+- edges,
+- contracts (input/output schemas, types),
+- policies (redaction, access, action restrictions),
+- versioning,
+- evaluator hooks,
+- delivery and scheduling metadata.
+
+This IR is the hedge against Langflow lock-in (Risk 6 in PRD §24) and enables future compiler-to-other-runtime.
+
+### 6.4 Core logical components (PRD §17.5)
+You are accountable for the existence, contracts, and boundaries of: Intent Parser, Clarification Manager, Policy & Abuse Guard, Task Spec Builder, Planner Agent, Workflow Compiler, Validation Engine, Execution Orchestrator, Evaluation/Critic, Report Generator, Delivery Component, Registry / Metadata Service.
+
+### 6.5 Custom component contract (PRD §16.5)
+Every custom component must expose: owner, description, input contract, output contract, config schema, secrets requirements, risk classification, approval status, tests, versioning, observability hooks. You own enforcement of this contract.
+
+### 6.6 Four levels of correctness (PRD §18.2)
+Architecture must support validation at all four levels: structural, execution, semantic, business. You ensure the platform provides the hooks required by the Applied Scientist to implement each level.
+
+### 6.7 Scalability dimensions (PRD §20.1)
+Architecture must scale along: use cases, components, custom integrations, users/runs, tenant/workspaces, recurring workflows, future supported runtimes.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 As Solution Architect, you will work with various stakeholders, including:
 
@@ -211,4 +249,8 @@ As Solution Architect, you will work with various stakeholders, including:
 - **UX Team**: To ensure the platform is usable and intuitive.
 - **AI Architect**: To design AI models for task understanding, clarification, and evaluation.
 - **Langflow Engineers**: To ensure seamless integration with Langflow and custom components.
+- **Backend / Platform Engineer**: To implement control-plane services and APIs.
+- **Data / Analytics Engineer**: To integrate connectors and data components into the IR and execution plane.
+- **Evaluation / Applied Scientist**: To ensure architecture supports all four correctness levels.
 - **Security Experts**: To ensure the platform meets data privacy and security requirements.
+- **DevOps / SRE**: To ensure infrastructure supports scalability and isolation requirements.

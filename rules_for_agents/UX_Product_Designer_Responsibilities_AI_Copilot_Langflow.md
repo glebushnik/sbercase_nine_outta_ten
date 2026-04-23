@@ -187,7 +187,44 @@ Your design will be instrumental in driving user engagement, reducing friction i
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- **Workstream A — UX & User Research** (co-owner with PM; contributors: Domain Expert, Solutions Engineer) — PRD §25.3.
+
+### 6.2 Four UX modes to design (PRD §11.2)
+The platform exposes four distinct UX modes. All four must be designed, not just the business-user mode:
+1. **Magic draft mode** — system auto-generates a workflow draft for quick start.
+2. **Guided setup mode** — step-by-step wizard with explanations and validation.
+3. **Advanced review mode** — view and limited editing of workflow (power user / analyst persona, PRD §5.3).
+4. **Operator / Admin mode** — components, policies, approvals, registry, audit (admin persona, PRD §5.4).
+
+### 6.3 UX pillars (PRD §11.3)
+Every screen must honor: simple language, minimal tech jargon, progressive disclosure, explainability, recovery-friendly flows, zero-console in main path, clear status and confidence.
+
+### 6.4 Seven user journey paths to design (PRD §12)
+Design coverage for all journey paths, not just the happy path:
+1. **Happy path** — clear business request (§12.1).
+2. **Vague request path** — structured clarification wizard (§12.2).
+3. **Missing data path** — existing source / connect new / upload / ask admin (§12.3).
+4. **Manual secrets / credentials path** — explain, validate safe-mode, recover (§12.4).
+5. **Partial manual completion path** — "what needs to be done by hand" (§12.5).
+6. **Low confidence result path** — surface reasons, recommendations, human-review option (§12.6).
+7. **Trolling / misuse path** — block, explain, safe alternative, audit (§12.7).
+8. **Recurring workflow path** — scheduling, delivery, run history, quality gate (§12.8).
+
+### 6.5 Explainability surfaces (PRD §11.1, §18)
+UX must surface before execution: what system understood, what's missing, proposed plan, what will be done, how quality will be checked, expected output shape. After execution: evidence, confidence, limitations.
+
+### 6.6 Low-confidence handling (PRD §18.5)
+Never mask low confidence. Design explicit surfaces for: reason (sparse data, noisy data, conflicting evidence, unstable clustering, weak task linkage), recommendations (refine task / improve source / adjust analysis / request human review / narrow scope).
+
+### 6.7 Abuse UX (PRD §12.7, §19)
+Design rejection copy and flows for all abuse classes: content manipulation ("make report look better than it is"), prompt injection, unauthorized access, destructive requests, privacy violations, spam/nonsense.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 You will collaborate closely with the following stakeholders:
 
@@ -195,4 +232,7 @@ You will collaborate closely with the following stakeholders:
 - **Solution Architect**: To ensure the design aligns with the technical architecture and scalability.
 - **Langflow Engineers**: To ensure seamless integration with Langflow and its components.
 - **AI Architect**: To ensure that AI models and machine learning workflows are integrated into the platform.
+- **Evaluation / Applied Scientist**: To surface confidence, evidence, and limitations correctly.
 - **Security Experts**: To ensure the platform adheres to security standards and prevents misuse or abuse.
+- **Technical Writer**: To co-own in-product copy, tooltips, and error messages.
+- **Domain Expert**: To validate domain-specific phrasing and patterns.

@@ -1,57 +1,57 @@
-# Final PRD — AI Copilot Platform for Business-Led Workflow Creation on top of Langflow
+# Финальный PRD — AI Copilot платформа для self-serve создания workflow бизнес-пользователями поверх Langflow
 
-**Version:** 1.0  
-**Status:** Final draft  
-**Language:** Russian  
-**Document type:** PRD / Product Requirements Document  
-**Document owner:** TBD  
-**Last updated:** 2026-04-22
+**Версия:** 1.1
+**Статус:** Финальный драфт
+**Язык:** русский
+**Тип документа:** PRD / Product Requirements Document
+**Владелец документа:** TBD
+**Последнее обновление:** 2026-04-23
 
 ---
 
-## 1. Executive Summary
+## 1. Executive Summary (Ключевые положения)
 
-### 1.1 Problem
+### 1.1 Проблема
 Бизнес-пользователи приходят не с техническими инструкциями вида «соедини компонент A с компонентом B», а с задачами на естественном языке:
 
 - «Собери аналитику по пользовательским диалогам за 2–3 недели»
 - «Найди причины недовольства и ключевые инсайты»
-- «Сгруппируй темы, суммаризуй, пришли отчет на email»
-- «Сделай это регулярным еженедельным отчетом»
+- «Сгруппируй темы, суммаризуй, пришли отчёт на email»
+- «Сделай это регулярным еженедельным отчётом»
 
 Сегодня такие запросы почти всегда требуют участия разработчика, аналитика или ML-специалиста. В результате:
 - time-to-insight слишком велик;
 - проверка гипотез занимает недели;
 - бизнес зависит от инженерной очереди;
-- low-code/no-code инструменты остаются инструментами для технарей.
+- low-code / no-code инструменты остаются инструментами для технарей.
 
-### 1.2 Product vision
-Создать платформу, которая позволяет бизнес-пользователю поставить задачу на естественном языке, пройти guided UX, автоматически собрать корректный workflow, безопасно выполнить его, проверить корректность результата и получить конечный бизнес-артефакт без обязательного участия разработчика.
+### 1.2 Видение продукта
+Создать платформу, которая позволяет бизнес-пользователю поставить задачу на естественном языке, пройти направляемый (guided) UX, автоматически собрать корректный workflow, безопасно выполнить его, проверить корректность результата и получить конечный бизнес-артефакт без обязательного участия разработчика.
 
-### 1.3 Core thesis
+### 1.3 Основной тезис
 Платформа должна быть:
-- **task-first**, а не canvas-first;
-- **guided**, а не “разбирайся сам”;
-- **validated**, а не “LLM что-то собрал”;
-- **policy-aware**, а не “магия без ограничений”;
-- **platform-grade**, а не только demo над Langflow.
+- **task-first** (от задачи), а не canvas-first (от схемы);
+- **guided** (направляющей), а не «разбирайся сам»;
+- **validated** (проверяемой), а не «LLM что-то собрал»;
+- **policy-aware** (политико-осознанной), а не «магия без ограничений»;
+- **platform-grade** (уровня платформы), а не только demo над Langflow.
 
 ---
 
-## 2. Product Goal
+## 2. Цель продукта
 
 Дать пользователю возможность **самостоятельно проверить бизнес-гипотезу end-to-end**:
 1. описать задачу естественным языком,
 2. выбрать или подключить данные,
 3. получить автоматически собранный workflow,
-4. протестировать его на sample или полном объеме,
+4. протестировать его на sample или полном объёме,
 5. увидеть метрики корректности и ограничения,
-6. получить отчет, email, таблицу или recurring job,
+6. получить отчёт, email, таблицу или recurring-job,
 7. сохранить и переиспользовать сценарий.
 
 ---
 
-## 3. Non-Goals
+## 3. Цели вне скоупа (Non-Goals)
 
 На первом этапе платформа не должна:
 - быть универсальной IDE для инженеров;
@@ -62,77 +62,77 @@
 
 ---
 
-## 4. Product Principles
+## 4. Принципы продукта
 
-1. **Task-first, not graph-first**  
+1. **Task-first, а не graph-first**
    Пользователь начинает с бизнес-задачи, а не со схемы.
 
-2. **Guided self-serve**  
-   Система помогает, уточняет, подсказывает и ведет пользователя по шагам.
+2. **Guided self-serve**
+   Система помогает, уточняет, подсказывает и ведёт пользователя по шагам.
 
-3. **Explain before execute**  
+3. **Explain before execute**
    Перед запуском пользователь понимает, что будет сделано, на каких данных и с какими ограничениями.
 
-4. **Validated automation**  
+4. **Validated automation**
    Workflow не просто строится, а проходит структурную, семантическую и бизнес-валидацию.
 
-5. **Evidence-based output**  
+5. **Evidence-based output**
    Выводы должны иметь подтверждение в данных.
 
-6. **Safety by design**  
+6. **Safety by design**
    Ограничения, политики, секреты, права доступа и анти-abuse механизмы встроены в архитектуру.
 
-7. **Composable platform**  
+7. **Composable platform**
    Платформа должна расти по числу сценариев, компонентов, кастомизаций и runtime-интеграций.
 
-8. **Human trust over AI theatrics**  
-   Лучше честно сказать “не хватает данных” или “результат низкой надежности”, чем выдать красивый, но ненадежный отчет.
+8. **Human trust over AI theatrics**
+   Лучше честно сказать «не хватает данных» или «результат низкой надёжности», чем выдать красивый, но ненадёжный отчёт.
 
 ---
 
-## 5. User Personas
+## 5. Пользовательские персоны
 
-### 5.1 Primary persona — Business Analyst / Ops Manager
+### 5.1 Первичная персона — Бизнес-аналитик / Ops-менеджер
 - Формулирует задачи на языке бизнеса
 - Не хочет работать с кодом и графами
-- Хочет быстро получать отчеты и ответы
+- Хочет быстро получать отчёты и ответы
 - Ожидает понятный и безопасный UX
 - Часто не знает архитектурных деталей данных
 
-### 5.2 Secondary persona — Product / CX Lead
+### 5.2 Вторичная персона — Product / CX Lead
 - Хочет регулярно проверять гипотезы
 - Хочет recurring workflows и доставку результатов
 - Нуждается в уверенности, что выводам можно доверять
 
-### 5.3 Advanced persona — Power User / Analyst
+### 5.3 Продвинутая персона — Power User / Аналитик
 - Хочет посмотреть flow и параметры
 - Готов ограниченно вмешиваться в настройки
 - Может использовать шаблоны и переиспользуемые сценарии
 
-### 5.4 Supporting persona — Admin / Platform Owner
-- Управляет доступами, компонентами, секретами, approved registry
+### 5.4 Поддерживающая персона — Admin / Владелец платформы
+- Управляет доступами, компонентами, секретами, approved-реестром
 - Следит за безопасностью, журналами, политиками
 - Разрешает или блокирует кастомные компоненты и интеграции
 
 ---
 
-## 6. Jobs To Be Done
+## 6. Jobs To Be Done (JTBD)
 
-### Main JTBD
+### Основной JTBD
 Когда у меня есть бизнес-вопрос или гипотеза, я хочу описать её обычным языком и быстро получить корректный, исполнимый и проверяемый workflow с результатом, чтобы не ждать разработчика.
 
-### Supporting JTBD
-- Когда я формулирую задачу нечетко, я хочу, чтобы система помогла уточнить её.
+### Вспомогательные JTBD
+- Когда я формулирую задачу нечётко, я хочу, чтобы система помогла уточнить её.
 - Когда мне нужны данные из корпоративных систем, я хочу подключить их без инженерной боли.
 - Когда результат получен, я хочу понимать, насколько ему можно доверять.
 - Когда сценарий полезен, я хочу сохранить его и запускать повторно.
-- Когда что-то идет не так, я хочу видеть понятные объяснения и дальнейшие шаги.
+- Когда что-то идёт не так, я хочу видеть понятные объяснения и дальнейшие шаги.
 
 ---
 
-## 7. Problem Statement
+## 7. Постановка проблемы
 
-### 7.1 Current state
+### 7.1 Текущее состояние
 Существующие workflow-инструменты часто предполагают, что пользователь:
 - уже понимает набор компонентов;
 - умеет мыслить графом;
@@ -141,11 +141,11 @@
 
 Для бизнес-пользователя это не работает.
 
-### 7.2 Target state
+### 7.2 Целевое состояние
 Пользователь должен иметь возможность:
 - прийти с задачей в свободной форме;
 - получить поддержку постановки;
-- увидеть предложенный plan;
+- увидеть предложенный план;
 - пройти минимальный onboarding данных и доступов;
 - запустить и проверить flow;
 - получить бизнес-результат;
@@ -153,87 +153,87 @@
 
 ---
 
-## 8. Scope
+## 8. Скоуп
 
-## 8.1 In scope
+## 8.1 В скоупе
 - Task-first UX для бизнес-пользователя
-- Guided clarification
-- Data onboarding
-- Automated workflow generation
-- Validation & evaluation
-- Langflow orchestration/runtime integration
-- Approved custom components
-- Report generation and delivery
-- Recurring workflows
-- Abuse/trolling handling
-- Versioning and reusable templates
-- Scaling architecture and control plane
+- Guided clarification (направляемое уточнение)
+- Data onboarding (подключение данных)
+- Автоматическая генерация workflow
+- Валидация и evaluation
+- Интеграция с Langflow как orchestration / runtime
+- Одобренные (approved) кастомные компоненты
+- Генерация и доставка отчётов
+- Recurring workflows (регулярные сценарии)
+- Обработка abuse / троллинга
+- Версионирование и переиспользуемые шаблоны
+- Масштабируемая архитектура и control plane
 
-## 8.2 Out of scope for MVP
-- Full open-ended agentic autonomy
-- General-purpose developer IDE
-- Arbitrary code execution by end users
-- Unrestricted external actions
-- Marketplace of public third-party components
-
----
-
-## 9. Core Product Capabilities
-
-1. Natural language task intake
-2. Guided clarification and task decomposition
-3. Source discovery / source onboarding / secure connection
-4. Task-to-workflow compilation
-5. Validation engine
-6. Execution through Langflow runtime
-7. Evaluation of correctness and trust
-8. Report generation and delivery
-9. Template reuse and workflow versioning
-10. Policy enforcement and abuse handling
-11. Custom component registry
-12. Platform observability, audit and governance
+## 8.2 Вне скоупа MVP
+- Полностью открытая агентная автономия
+- Универсальная IDE для разработчика
+- Произвольное выполнение кода конечным пользователем
+- Неограниченные внешние действия
+- Публичный маркетплейс сторонних компонентов
 
 ---
 
-## 10. Supported Use Cases
+## 9. Ключевые продуктовые возможности
 
-### 10.1 Conversation analytics
-- Analyze dialogs over a time window
-- Find dissatisfaction drivers
-- Cluster themes
-- Summarize insights
-- Compare periods
-- Produce management-ready report
-
-### 10.2 Document / corpus analysis
-- Summarization of a corpus
-- Key insight extraction
-- Contradiction or issue detection
-- Trend tracking across time
-
-### 10.3 Operations monitoring
-- Classify incidents or tickets
-- Detect recurring issues
-- Build weekly report
-- Alert on threshold conditions
-
-### 10.4 Knowledge / support quality workflows
-- Find top unresolved topics
-- Extract repeated user pain points
-- Summarize escalations
-- Generate internal digest
-
-### 10.5 Scheduled business workflows
-- Weekly or monthly recurring report
-- Email delivery
-- Dashboard feed
-- Team digest
+1. Приём задачи на естественном языке (Natural language task intake)
+2. Guided clarification и декомпозиция задачи
+3. Обнаружение / подключение / безопасное соединение с источниками данных
+4. Компиляция «задача → workflow»
+5. Движок валидации (Validation Engine)
+6. Исполнение через Langflow runtime
+7. Оценка корректности и доверия к результату
+8. Генерация и доставка отчётов
+9. Переиспользование шаблонов и версионирование workflow
+10. Применение политик и обработка abuse
+11. Реестр кастомных компонентов
+12. Observability платформы, аудит и governance
 
 ---
 
-## 11. User Experience Strategy
+## 10. Поддерживаемые сценарии использования
 
-### 11.1 UX thesis
+### 10.1 Conversation analytics (аналитика диалогов)
+- Анализ диалогов в заданном временном окне
+- Поиск драйверов недовольства
+- Кластеризация тем
+- Суммаризация инсайтов
+- Сравнение периодов
+- Формирование management-ready отчёта
+
+### 10.2 Document / corpus analysis (анализ документов / корпуса)
+- Суммаризация корпуса
+- Извлечение ключевых инсайтов
+- Обнаружение противоречий и проблемных мест
+- Отслеживание трендов во времени
+
+### 10.3 Operations monitoring (мониторинг операций)
+- Классификация инцидентов и тикетов
+- Обнаружение повторяющихся проблем
+- Еженедельные отчёты
+- Алерты по порогам
+
+### 10.4 Knowledge / support quality (качество поддержки и знаний)
+- Топ нерешённых тем
+- Повторяющиеся болевые точки пользователей
+- Суммаризация эскалаций
+- Внутренний дайджест
+
+### 10.5 Scheduled business workflows (регулярные бизнес-сценарии)
+- Еженедельные и ежемесячные отчёты
+- Доставка по email
+- Поток в дашборд
+- Командный дайджест
+
+---
+
+## 11. UX-стратегия
+
+### 11.1 UX-тезис
 Бизнес-пользователь не должен начинать с canvas. Он должен начинать с задачи и видеть:
 - что система поняла;
 - чего не хватает;
@@ -242,80 +242,80 @@
 - как будет проверено качество;
 - что получится на выходе.
 
-### 11.2 UX modes
-1. **Magic draft mode**  
+### 11.2 UX-режимы
+1. **Magic draft mode (режим магического черновика)**
    Для быстрого старта: система сама строит черновик workflow.
 
-2. **Guided setup mode**  
+2. **Guided setup mode (режим пошагового мастера)**
    Пошаговый wizard с объяснениями и проверками.
 
-3. **Advanced review mode**  
+3. **Advanced review mode (режим просмотра и редактирования)**
    Просмотр и ограниченное редактирование workflow.
 
-4. **Operator/admin mode**  
-   Работа с компонентами, политиками, approvals, registry и аудитом.
+4. **Operator / Admin mode (режим оператора / администратора)**
+   Работа с компонентами, политиками, approvals, реестром и аудитом.
 
-### 11.3 UX pillars
+### 11.3 UX-принципы
 - Простые формулировки
 - Минимум технической терминологии
-- Progressive disclosure
-- Explainability
-- Recovery-friendly flows
-- Zero-console in main path
-- Clear status and confidence
+- Progressive disclosure (постепенное раскрытие сложности)
+- Explainability (объяснимость)
+- Recovery-friendly flows (дружелюбные к восстановлению сценарии)
+- Zero-console в основном пути
+- Явный статус и уровень уверенности (confidence)
 
 ---
 
-## 12. User Journey Map
+## 12. Карта пользовательского пути
 
-## 12.1 Happy path — clear business request
+## 12.1 Happy path — чёткий бизнес-запрос
 1. Пользователь вводит задачу.
-2. Система распознает use case.
-3. Задает ограниченный набор уточнений.
+2. Система распознаёт use case.
+3. Задаёт ограниченный набор уточнений.
 4. Пользователь выбирает источник данных и период.
-5. Система показывает proposed workflow.
-6. Проводит preflight validation.
+5. Система показывает предложенный workflow.
+6. Проводит preflight-валидацию.
 7. Запускает sample-run.
-8. Показывает preview result + quality summary.
+8. Показывает preview результата и сводку по качеству.
 9. После подтверждения выполняет полный run.
-10. Формирует и отправляет report.
-11. Предлагает сохранить как template или recurring job.
+10. Формирует и отправляет отчёт.
+11. Предлагает сохранить как шаблон или recurring-job.
 
-## 12.2 Vague request path
-1. Пользователь пишет нечеткую задачу.
-2. Intent parser определяет низкую определенность.
-3. Clarification manager запускает structured wizard.
+## 12.2 Путь нечёткого запроса
+1. Пользователь пишет нечёткую задачу.
+2. Intent Parser определяет низкую определённость.
+3. Clarification Manager запускает structured wizard.
 4. Предлагаются типовые трактовки сценария.
 5. Пользователь выбирает нужный смысл.
 6. Формируется task spec.
-7. Дальше пользователь идет в основной путь.
+7. Далее пользователь идёт в основной путь.
 
-## 12.3 Missing data path
-1. Система понимает, что источник не определен.
+## 12.3 Путь отсутствующих данных
+1. Система понимает, что источник не определён.
 2. Предлагает:
-   - existing source;
-   - connect new source;
-   - upload file;
-   - ask admin.
-3. После setup делает data validation и preview.
+   - использовать существующий источник;
+   - подключить новый источник;
+   - загрузить файл;
+   - запросить у администратора.
+3. После setup делает валидацию данных и preview.
 4. Возвращается к сборке workflow.
 
-## 12.4 Manual secrets / credentials path
+## 12.4 Путь ручных секретов / credentials
 1. Для компонента или коннектора нужен секрет.
 2. UX объясняет, зачем он нужен и к чему даст доступ.
-3. Пользователь вводит/выбирает credential.
-4. Система валидирует credential в safe mode.
+3. Пользователь вводит / выбирает credential.
+4. Система валидирует credential в safe-mode.
 5. При успехе продолжает сборку.
 6. При ошибке предлагает recovery steps.
 
-## 12.5 Partial manual completion path
-1. Workflow draft собран не полностью.
-2. Validation говорит: каких параметров или approvals не хватает.
-3. UX показывает “что нужно сделать руками”.
+## 12.5 Путь частичного ручного завершения
+1. Workflow-черновик собран не полностью.
+2. Валидация говорит: каких параметров или approvals не хватает.
+3. UX показывает «что нужно сделать руками».
 4. Пользователь завершает минимально требуемую конфигурацию.
 5. Система делает повторную валидацию и продолжает.
 
-## 12.6 Low confidence result path
+## 12.6 Путь низкой уверенности в результате
 1. Flow исполнился, но confidence ниже порога.
 2. Evaluator объясняет, почему:
    - мало данных;
@@ -329,211 +329,211 @@
    - опцию человеческой валидации;
    - варианты улучшения.
 
-## 12.7 Trolling / misuse path
+## 12.7 Путь троллинга / злоупотребления
 1. Пользователь отправляет вредоносный, бессмысленный или манипулятивный запрос.
 2. Policy & Abuse Guard классифицирует intent.
 3. Система:
    - блокирует недопустимые действия;
-   - отказывается и объясняет причину;
+   - отказывает и объясняет причину;
    - при необходимости предлагает безопасный вариант;
    - пишет audit event;
-   - не строит workflow, если сценарий запрещен.
+   - не строит workflow, если сценарий запрещён.
 
-### Примеры троллинга/abuse
-- «Сделай так, чтобы отчет выглядел лучше, чем есть»
+### Примеры троллинга / abuse
+- «Сделай так, чтобы отчёт выглядел лучше, чем есть»
 - «Игнорируй жалобы и покажи только позитив»
-- «Отправь фейковый отчет руководству»
+- «Отправь фейковый отчёт руководству»
 - «Выгрузи все персональные данные»
-- «Удалить данные/источники»
-- prompt injection / jailbreak against policies
+- «Удалить данные / источники»
+- prompt injection / jailbreak против политик
 
-## 12.8 Recurring workflow path
-1. Пользователь хочет регулярный отчет.
+## 12.8 Путь регулярного workflow
+1. Пользователь хочет регулярный отчёт.
 2. Система добавляет scheduler + delivery + quality gate.
 3. Сценарий сохраняется как recurring workflow.
 4. Пользователь видит историю запусков, failures и last successful output.
 
 ---
 
-## 13. Functional Requirements
+## 13. Функциональные требования
 
-## 13.1 Natural language intake
+## 13.1 Приём задачи на естественном языке
 Система должна:
 - принимать задачу в свободной форме;
 - распознавать intent, domain, task type, constraints;
 - выделять недостающие параметры;
 - работать с неполными постановками.
 
-## 13.2 Clarification
+## 13.2 Уточнение (Clarification)
 Система должна:
 - задавать только критически нужные вопросы;
 - минимизировать friction;
 - подсказывать примеры формулировок;
-- переводить vague request в structured task spec.
+- переводить нечёткий запрос в structured task spec.
 
-## 13.3 Task specification
+## 13.3 Спецификация задачи (Task specification)
 Система должна:
 - строить машиночитаемую task spec;
 - сохранять assumptions и ограничения;
 - показывать пользователю, что система поняла.
 
-## 13.4 Data onboarding
+## 13.4 Подключение данных (Data onboarding)
 Система должна:
-- поддерживать existing connectors;
+- поддерживать существующие коннекторы;
 - поддерживать onboarding новых интеграций;
-- поддерживать fallback upload;
-- делать source validation;
+- поддерживать fallback-загрузку файлов;
+- делать валидацию источника;
 - показывать data preview;
 - учитывать доступы и политики данных.
 
-## 13.5 Workflow generation
+## 13.5 Генерация workflow
 Система должна:
-- выбирать шаблон/blueprint под задачу;
+- выбирать шаблон / blueprint под задачу;
 - собирать workflow автоматически;
-- использовать approved components only by default;
-- добавлять subflows, evaluator blocks, report generation, delivery blocks;
-- поддерживать recurring jobs.
+- использовать approved-компоненты по умолчанию;
+- добавлять subflows, evaluator-блоки, report generation, delivery-блоки;
+- поддерживать recurring-jobs.
 
-## 13.6 Validation
+## 13.6 Валидация
 Система должна проверять:
 - структурную корректность flow;
-- совместимость input/output contracts;
+- совместимость input/output контрактов;
 - наличие обязательных параметров;
-- валидность credentials and access;
+- валидность credentials и прав доступа;
 - поддерживаемость runtime;
-- policy compliance;
+- соответствие политикам (policy compliance);
 - preflight на test sample.
 
-## 13.7 Execution
+## 13.7 Исполнение
 Система должна:
 - запускать sample-run;
 - запускать full-run;
-- поддерживать async execution;
+- поддерживать асинхронное исполнение;
 - сохранять traces;
 - отображать прогресс;
 - обрабатывать retries / timeouts / partial failures.
 
-## 13.8 Result evaluation
+## 13.8 Оценка результата (Result evaluation)
 Система должна:
 - проверять semantic fit результата к задаче;
 - вычислять confidence;
-- обеспечивать evidence links;
+- обеспечивать evidence-ссылки;
 - показывать ограничения;
 - при необходимости запрашивать human review.
 
-## 13.9 Report and delivery
+## 13.9 Отчёт и доставка
 Система должна:
 - формировать business-readable output;
-- поддерживать email/report/export/dashboard payload;
-- сохранять execution history;
-- поддерживать recurring delivery.
+- поддерживать email / отчёт / экспорт / payload для дашборда;
+- сохранять историю исполнений;
+- поддерживать регулярную доставку.
 
-## 13.10 Reuse and templates
+## 13.10 Переиспользование и шаблоны
 Система должна:
-- сохранять flow как reusable template;
+- сохранять flow как reusable-шаблон;
 - клонировать и адаптировать сценарии;
 - хранить версии workflow;
-- поддерживать approved template library.
+- поддерживать approved-библиотеку шаблонов.
 
-## 13.11 Custom components
+## 13.11 Кастомные компоненты
 Система должна:
 - поддерживать кастомные компоненты, когда стандартных блоков Langflow недостаточно;
-- требовать contracts, security review и versioning;
-- позволять planner использовать кастомные компоненты только если они approved;
+- требовать контракты, security review и версионирование;
+- позволять планировщику использовать кастомные компоненты только если они approved;
 - обеспечивать observability и controlled runtime для кастомных компонентов.
 
-## 13.12 Policy & abuse handling
+## 13.12 Политики и обработка abuse
 Система должна:
-- распознавать троллинг, misuse и запрещенные действия;
+- распознавать троллинг, misuse и запрещённые действия;
 - блокировать policy-violating runs;
-- логировать и эскалировать abuse events;
+- логировать и эскалировать abuse-события;
 - не позволять пользователю манипулировать выводами без данных;
-- не выполнять destructive actions без отдельного разрешенного сценария и ролей.
+- не выполнять destructive actions без отдельного разрешённого сценария и ролей.
 
 ---
 
-## 14. Non-Functional Requirements
+## 14. Нефункциональные требования
 
-### 14.1 UX requirements
-- Main path without console
-- Progressive disclosure of complexity
-- Human-readable errors and next steps
-- Explainability of plan and result
-- Resumable workflows
-- Minimal unnecessary technical jargon
+### 14.1 UX-требования
+- Основной путь без консоли
+- Progressive disclosure сложности
+- Человекочитаемые ошибки и next steps
+- Explainability плана и результата
+- Resumable workflows (возобновляемые сценарии)
+- Минимум лишнего технического жаргона
 
-### 14.2 Reliability
-- Idempotent execution where feasible
-- Retry strategy
-- Timeout handling
-- Partial failure recovery
-- Last-known-good recovery path
-- Versioned reproducibility
+### 14.2 Надёжность
+- Идемпотентное исполнение там, где это возможно
+- Стратегия retry
+- Обработка timeouts
+- Восстановление при partial failure
+- Путь восстановления last-known-good
+- Воспроизводимость по версиям
 
-### 14.3 Security
+### 14.3 Безопасность
 - RBAC / permissions
-- Secrets vault
-- Audit logs
-- PII redaction / masking where required
-- Tenant/workspace isolation
-- Policy enforcement on data handling and action execution
+- Vault для секретов
+- Журналы аудита
+- PII-редакция / маскирование там, где требуется
+- Изоляция tenant / workspace
+- Применение политик к обработке данных и выполнению действий
 
-### 14.4 Scalability
-- Growth in number of components
-- Growth in number of use cases
-- Growth in custom integrations
-- Growth in execution load
-- Runtime-agnostic intermediate representation
-- Approval workflow for expanded component ecosystem
+### 14.4 Масштабируемость
+- Рост числа компонентов
+- Рост числа use cases
+- Рост числа кастомных интеграций
+- Рост нагрузки на исполнение
+- Runtime-нейтральное промежуточное представление
+- Approval-процесс для расширения экосистемы компонентов
 
-### 14.5 Maintainability
-- Contracts for components
-- Versioning for workflows/templates/components
-- Registry and deprecation policy
-- Test harness for standard and custom components
-- Architecture separation between control plane and execution plane
+### 14.5 Поддерживаемость
+- Контракты для компонентов
+- Версионирование workflow / шаблонов / компонентов
+- Registry и deprecation-политика
+- Test harness для стандартных и кастомных компонентов
+- Архитектурное разделение control plane и execution plane
 
 ### 14.6 Observability
-- Structured logs
-- Traces
-- Execution lineage
-- Quality metrics
-- Failure taxonomies
-- Audit and abuse events
+- Структурированные логи
+- Трейсы (traces)
+- Lineage исполнения
+- Метрики качества
+- Таксономия сбоев
+- Audit- и abuse-события
 
 ---
 
-## 15. Proposed Product Architecture
+## 15. Предлагаемая продуктовая архитектура
 
-## 15.1 Architectural thesis
+## 15.1 Архитектурный тезис
 Платформа должна строиться как **двухконтурная система**:
 
-### A. Control Plane
+### A. Control Plane (контур управления)
 Отвечает за:
 - понимание задачи,
 - уточнение,
 - policy guard,
-- planning,
-- workflow compilation,
-- validation,
+- планирование,
+- компиляцию workflow,
+- валидацию,
 - evaluation,
 - registry,
-- templates,
+- шаблоны,
 - governance.
 
-### B. Execution Plane
+### B. Execution Plane (контур исполнения)
 Отвечает за:
 - фактическое исполнение flow,
-- data connectors,
-- orchestration,
+- коннекторы данных,
+- оркестрацию,
 - subflows,
-- custom components,
-- report generation,
-- delivery.
+- кастомные компоненты,
+- генерацию отчётов,
+- доставку.
 
-Langflow в этой модели — это **основной orchestration/runtime слой execution plane**, а не вся система целиком.
+Langflow в этой модели — это **основной orchestration / runtime-слой execution plane**, а не вся система целиком.
 
-## 15.2 High-level architecture
+## 15.2 Архитектура верхнего уровня
 
 ```text
 [User Interface]
@@ -573,93 +573,93 @@ Langflow в этой модели — это **основной orchestration/ru
 
 ---
 
-## 16. Integration with Langflow
+## 16. Интеграция с Langflow
 
-## 16.1 Role of Langflow
+## 16.1 Роль Langflow
 Langflow используется как:
-- visual orchestration layer;
-- execution runtime for flows;
-- component composition layer;
-- subflow/tool execution layer;
-- visual representation and debugging surface for power users and operators.
+- visual-оркестрация;
+- runtime исполнения flows;
+- слой композиции компонентов;
+- слой исполнения subflows / tool-flows;
+- визуальное представление и surface отладки для power-users и операторов.
 
-## 16.2 What stays outside Langflow
+## 16.2 Что остаётся вне Langflow
 Следующие функции должны жить **вне** Langflow:
-- intent understanding;
-- clarification logic;
-- policy and abuse decisions;
-- task spec lifecycle;
-- workflow compiler logic;
-- validation framework;
-- evaluation framework;
-- registry and approvals;
-- platform analytics and governance.
+- понимание intent;
+- логика уточнения;
+- решения по policy и abuse;
+- жизненный цикл task spec;
+- логика workflow compiler;
+- фреймворк валидации;
+- фреймворк evaluation;
+- registry и approvals;
+- платформенная аналитика и governance.
 
-## 16.3 Why not “just build everything in Langflow”
+## 16.3 Почему нельзя «просто построить всё в Langflow»
 Потому что:
-- user intent understanding ≠ flow execution;
-- validation and governance требуют отдельной логики;
-- platform scaling требует registry, contracts and approvals;
-- нужен runtime-neutral abstraction layer;
-- Langflow должен быть orchestration substrate, а не единственной точкой продуктовой логики.
+- понимание user intent ≠ исполнение flow;
+- валидация и governance требуют отдельной логики;
+- платформенный scaling требует registry, контрактов и approvals;
+- нужен runtime-neutral слой абстракции;
+- Langflow должен быть orchestration-подложкой, а не единственной точкой продуктовой логики.
 
-## 16.4 Langflow integration model
+## 16.4 Модель интеграции с Langflow
 1. Control plane получает task spec.
 2. Planner генерирует blueprint.
-3. Workflow compiler:
-   - выбирает стандартные и кастомные approved components;
+3. Workflow Compiler:
+   - выбирает стандартные и кастомные approved-компоненты;
    - строит runtime-neutral flow spec;
-   - компилирует его в Langflow-compatible flow.
-4. Validation выполняется на уровне spec и runtime readiness.
+   - компилирует его в Langflow-совместимый flow.
+4. Валидация выполняется на уровне spec и runtime readiness.
 5. Flow исполняется через Langflow runtime.
-6. Traces and outputs возвращаются в control plane.
-7. Evaluator and report layer завершают пользовательский цикл.
+6. Traces и outputs возвращаются в control plane.
+7. Evaluator и слой отчётов завершают пользовательский цикл.
 
-## 16.5 Custom components in Langflow
+## 16.5 Кастомные компоненты в Langflow
 Платформа должна разрешать кастомные компоненты в Langflow, если:
-- они нужны для internal connectors;
-- нужны специальные validators/evaluators;
-- требуется enterprise policy layer;
-- нужен нестандартный output/delivery;
+- они нужны для внутренних коннекторов;
+- нужны специализированные validators / evaluators;
+- требуется enterprise-policy слой;
+- нужен нестандартный output / delivery;
 - требуется доменно-специфическая логика.
 
-### Requirements for custom components
-- Owner
-- Description
-- Input contract
-- Output contract
-- Config schema
-- Secrets requirements
-- Risk classification
-- Approval status
-- Tests
-- Versioning
-- Observability hooks
+### Требования к кастомным компонентам
+- Владелец (owner)
+- Описание
+- Input-контракт
+- Output-контракт
+- Схема конфигурации
+- Требования к секретам
+- Классификация рисков
+- Статус approval
+- Тесты
+- Версионирование
+- Observability-хуки
 
 ---
 
-## 17. Agent and Component Model
+## 17. Модель агентов и компонентов
 
-## 17.1 Architectural decision
-Платформа не должна опираться на одного “супер-агента”.  
-Рекомендуемая модель: **hybrid deterministic-agentic architecture**.
+## 17.1 Архитектурное решение
+Платформа не должна опираться на одного «супер-агента».
+Рекомендуемая модель: **гибридная детерминистско-агентная архитектура (hybrid deterministic-agentic)**.
 
-## 17.2 Why not one agent
+## 17.2 Почему не один агент
 Один агент:
 - слишком хрупкий;
 - плохо объясним;
 - трудно контролируем;
 - хуже валидируется;
-- не дает гарантии на корректность сборки и действий.
+- не даёт гарантий на корректность сборки и действий.
 
-## 17.3 Why not full multi-agent by default
+## 17.3 Почему не полный multi-agent по умолчанию
 Полная multi-agent схема:
 - сильно усложняет систему;
 - добавляет недетерминированность;
 - труднее масштабируется и защищается.
 
-## 17.4 Recommended model
-### Deterministic layers
+## 17.4 Рекомендуемая модель
+### Детерминированные слои
 - Registry
 - Compiler
 - Validation
@@ -667,106 +667,106 @@ Langflow используется как:
 - Delivery
 - Governance
 
-### Agentic layers
-- Intent understanding
-- Clarification
-- Planning
-- Semantic evaluation
-- Business-ready report narration
+### Агентные слои
+- Понимание intent
+- Уточнение
+- Планирование
+- Семантическое evaluation
+- Нарратив business-ready отчёта
 
-## 17.5 Core logical components
+## 17.5 Ключевые логические компоненты
 
-### Intent Parser
-Вход: natural language request  
-Выход: intent, task category, confidence, missing fields
+### Intent Parser (парсер намерения)
+Вход: запрос на естественном языке
+Выход: intent, категория задачи, confidence, отсутствующие поля
 
-### Clarification Manager
-Вход: partial task understanding  
-Выход: complete/near-complete task definition through guided questions
+### Clarification Manager (менеджер уточнений)
+Вход: частичное понимание задачи
+Выход: полное / почти полное определение задачи через направляемые вопросы
 
-### Policy & Abuse Guard
-Вход: user request + action plan  
-Выход: allow / block / safe alternative / escalation
+### Policy & Abuse Guard (политика и защита от злоупотреблений)
+Вход: запрос пользователя + план действий
+Выход: allow / block / безопасная альтернатива / эскалация
 
-### Task Spec Builder
-Вход: clarified user intent  
-Выход: machine-readable task spec
+### Task Spec Builder (строитель спецификации задачи)
+Вход: уточнённый intent
+Выход: машиночитаемая task spec
 
-### Planner Agent
-Вход: task spec + registry  
-Выход: high-level workflow blueprint
+### Planner Agent (агент-планировщик)
+Вход: task spec + registry
+Выход: blueprint (высокоуровневый план workflow)
 
-### Workflow Compiler
-Вход: blueprint  
-Выход: runtime-neutral workflow + Langflow flow draft
+### Workflow Compiler (компилятор workflow)
+Вход: blueprint
+Выход: runtime-нейтральный workflow + Langflow-черновик flow
 
-### Validation Engine
-Вход: flow draft  
-Выход: structural/runtime/policy validation report
+### Validation Engine (движок валидации)
+Вход: черновик flow
+Выход: отчёт о структурной / runtime / policy валидации
 
-### Execution Orchestrator
-Вход: validated flow  
-Выход: runtime traces and outputs
+### Execution Orchestrator (оркестратор исполнения)
+Вход: валидированный flow
+Выход: runtime-трейсы и outputs
 
-### Evaluation / Critic
-Вход: outputs + task spec + traces  
-Выход: quality summary, semantic fit, confidence, evidence coverage
+### Evaluation / Critic (оценщик / критик)
+Вход: outputs + task spec + traces
+Выход: сводка качества, semantic fit, confidence, покрытие evidence
 
-### Report Generator
-Вход: evaluated outputs  
-Выход: business-readable report or digest
+### Report Generator (генератор отчётов)
+Вход: оценённые outputs
+Выход: business-readable отчёт или дайджест
 
-### Delivery Component
-Вход: final artifact  
-Выход: email/export/dashboard delivery status
+### Delivery Component (компонент доставки)
+Вход: финальный артефакт
+Выход: статус доставки email / экспорта / дашборда
 
-### Registry / Metadata Service
+### Registry / Metadata Service (реестр и сервис метаданных)
 Хранит:
-- components,
-- custom components,
-- templates,
-- versions,
+- компоненты,
+- кастомные компоненты,
+- шаблоны,
+- версии,
 - approvals,
 - lineage,
-- audit events.
+- audit-события.
 
 ---
 
-## 18. Correctness and Trust Framework
+## 18. Фреймворк корректности и доверия
 
-## 18.1 Why correctness must be first-class
-Пользователь не просто просит “собери workflow”. Он хочет, чтобы платформа:
+## 18.1 Почему корректность должна быть first-class
+Пользователь не просто просит «собери workflow». Он хочет, чтобы платформа:
 - поняла задачу;
 - собрала корректный процесс;
 - не исказила смысл;
 - не выдала красивые, но ложные инсайты;
 - показала, почему результату можно доверять.
 
-## 18.2 Four levels of correctness
+## 18.2 Четыре уровня корректности
 
-### 1. Structural correctness
+### 1. Структурная корректность
 Проверяется:
 - валидность графа;
-- обязательные входы/параметры;
-- совместимость input/output contracts;
+- обязательные входы / параметры;
+- совместимость input / output контрактов;
 - допустимость комбинации компонентов.
 
-### 2. Execution correctness
+### 2. Корректность исполнения
 Проверяется:
-- ability to execute;
-- success of sample run;
-- runtime stability;
-- retry/timeout behavior;
-- output schema validity.
+- способность выполняться (ability to execute);
+- успех sample-run;
+- стабильность runtime;
+- поведение retry / timeout;
+- валидность output-схемы.
 
-### 3. Semantic correctness
+### 3. Семантическая корректность
 Проверяется:
 - workflow действительно решает задачу пользователя;
-- requested dimensions and outputs are present;
-- if user asked for trends, trends are generated;
-- if user asked for dissatisfaction causes, not just generic summary is returned.
+- запрошенные dimensions и outputs присутствуют;
+- если запрошены тренды — тренды генерируются;
+- если запрошены причины недовольства — возвращается не просто generic-summary.
 
-### 4. Business correctness
+### 4. Бизнес-корректность
 Проверяется:
 - результат пригоден для решения бизнес-вопроса;
 - выводы подкреплены данными;
@@ -774,24 +774,24 @@ Langflow используется как:
 - есть limitations;
 - при необходимости назначается human review.
 
-## 18.3 Required validation stages
-1. Task understanding validation
-2. Spec sanity validation
-3. Workflow structural validation
-4. Data readiness validation
-5. Sample-run validation
-6. Semantic result validation
-7. Final report confidence gate
+## 18.3 Обязательные стадии валидации
+1. Валидация понимания задачи
+2. Валидация sanity спецификации
+3. Валидация структуры workflow
+4. Валидация готовности данных
+5. Валидация sample-run
+6. Валидация семантики результата
+7. Confidence-gate финального отчёта
 
-## 18.4 Evidence model
-Каждый значимый вывод в отчете должен, где применимо, иметь:
-- evidence examples;
-- counts or coverage;
-- source mapping;
-- confidence signal;
-- limitation note if required.
+## 18.4 Модель evidence
+Каждый значимый вывод в отчёте должен, где применимо, иметь:
+- примеры evidence;
+- counts / coverage;
+- source mapping (сопоставление с источником);
+- сигнал confidence;
+- limitation note, если требуется.
 
-## 18.5 Handling low-confidence outputs
+## 18.5 Обработка low-confidence outputs
 Если confidence ниже заданного порога, система должна:
 - не маскировать это;
 - показать причину;
@@ -804,428 +804,428 @@ Langflow используется как:
 
 ---
 
-## 19. Abuse, Trolling and Adversarial Handling
+## 19. Abuse, троллинг и adversarial-обработка
 
-## 19.1 Why this matters
-Если система ориентирована на self-serve и естественный язык, она неизбежно столкнется с:
+## 19.1 Почему это важно
+Если система ориентирована на self-serve и естественный язык, она неизбежно столкнётся с:
 - троллингом;
-- manipulative prompting;
-- попытками “подкрутить” вывод;
+- манипулятивным промптингом;
+- попытками «подкрутить» вывод;
 - запросами на небезопасные действия;
 - бессмысленными заданиями;
-- policy bypass попытками.
+- попытками обойти политику (policy bypass).
 
-## 19.2 Abuse classes
-- Content manipulation requests
+## 19.2 Классы abuse
+- Запросы на манипуляцию контентом
 - Prompt injection / jailbreak
-- Unauthorized access attempts
-- Destructive requests
-- Privacy violating requests
-- Spam / nonsense / load abuse
+- Попытки неавторизованного доступа
+- Destructive-запросы
+- Запросы, нарушающие приватность
+- Spam / бессмыслица / load abuse
 
-## 19.3 Abuse response policy
+## 19.3 Политика реакции на abuse
 Система должна:
 - классифицировать abuse;
-- блокировать запрещенные сценарии;
+- блокировать запрещённые сценарии;
 - логировать событие;
-- не строить или не запускать flow;
+- не строить и не запускать flow;
 - выдавать безопасное объяснение;
 - эскалировать при повторяющемся злоупотреблении.
 
 ---
 
-## 20. Scalability Strategy
+## 20. Стратегия масштабируемости
 
-## 20.1 Scaling dimensions
+## 20.1 Измерения масштабирования
 Платформа должна масштабироваться по:
 - количеству use cases;
 - числу компонентов;
 - числу кастомных интеграций;
 - числу пользователей и запусков;
-- числу tenant/workspaces;
+- числу tenant / workspaces;
 - числу recurring workflows;
-- числу supported runtimes in future.
+- числу supported runtimes в будущем.
 
-## 20.2 Component growth
+## 20.2 Рост числа компонентов
 Чтобы рост числа компонентов не утопил платформу, нужна:
-- capability taxonomy;
-- component registry;
-- contracts;
-- approval model;
-- discoverability and search;
-- deprecation policy;
-- compatibility checks.
+- таксономия возможностей (capability taxonomy);
+- реестр компонентов;
+- контракты;
+- approval-модель;
+- discoverability и поиск;
+- deprecation-политика;
+- проверки совместимости.
 
-## 20.3 Customization growth
+## 20.3 Рост кастомизации
 Для роста кастомизации нужны:
-- custom component SDK/process;
-- strong contracts;
-- isolation and approvals;
+- SDK / процесс для кастомных компонентов;
+- строгие контракты;
+- изоляция и approvals;
 - test harness;
-- observability requirements;
+- требования к observability;
 - version pinning.
 
-## 20.4 Runtime portability
+## 20.4 Runtime portability (портируемость между runtime)
 Чтобы не зависеть навсегда только от Langflow, нужен:
-- runtime-neutral intermediate representation (IR) of workflow;
-- compiler to Langflow;
-- возможность будущего compiler-to-other-runtime.
+- runtime-нейтральное промежуточное представление (IR) workflow;
+- компилятор в Langflow;
+- возможность будущего компилятора в другой runtime.
 
-### IR must capture
-- nodes,
-- edges,
-- contracts,
-- policies,
-- versioning,
-- evaluator hooks,
-- delivery and scheduling metadata.
+### Что должно содержать IR
+- nodes (узлы),
+- edges (связи),
+- contracts (контракты),
+- policies (политики),
+- versioning (версионирование),
+- evaluator-хуки,
+- метаданные доставки и расписания.
 
-## 20.5 Operational scalability
-Нужны:
-- queue-based execution;
+## 20.5 Операционная масштабируемость
+Необходимы:
+- исполнение на очередях (queue-based execution);
 - workers;
-- async jobs;
-- scheduling;
+- асинхронные jobs;
+- расписание (scheduling);
 - checkpointing;
-- caching where appropriate;
+- кэширование там, где применимо;
 - resource budgets;
-- observability dashboards.
+- observability-дашборды.
 
 ---
 
-## 21. Data and Security Considerations
+## 21. Данные и соображения безопасности
 
-### 21.1 Security requirements
-- Workspace / tenant isolation
-- RBAC/ABAC where needed
-- Secret storage and rotation
-- PII masking/redaction
-- Auditability
-- Action restrictions by role
-- Approval workflow for sensitive connectors and components
+### 21.1 Требования к безопасности
+- Изоляция workspace / tenant
+- RBAC / ABAC там, где требуется
+- Хранение и ротация секретов
+- Маскирование / редакция PII
+- Audability
+- Ограничения действий по ролям
+- Approval-процесс для чувствительных коннекторов и компонентов
 
 ### 21.2 Data governance
-- Source registration
-- Data classification
-- Retention rules
-- Execution lineage
+- Регистрация источников
+- Классификация данных
+- Правила хранения (retention)
+- Lineage исполнения
 - Policy-based access control
-- Restrictions on model usage by data class
+- Ограничения на использование моделей по классам данных
 
 ---
 
-## 22. Metrics Framework
+## 22. Метрики
 
-## 22.1 Product metrics
-- Self-serve completion rate
-- Time to first useful workflow
-- Repeat usage rate
-- Template reuse rate
-- Share of tasks completed without developer
-- Conversion from request to executed workflow
+## 22.1 Продуктовые метрики
+- Self-serve completion rate (доля задач, завершённых самостоятельно)
+- Time to first useful workflow (время до первого полезного workflow)
+- Repeat usage rate (повторное использование)
+- Template reuse rate (переиспользование шаблонов)
+- Доля задач, выполненных без участия разработчика
+- Конверсия «запрос → исполненный workflow»
 
-## 22.2 UX metrics
-- Average number of clarification steps
-- Drop-off by stage
-- Credential setup completion rate
-- Recovery success rate from errors
-- CSAT / perceived usefulness
+## 22.2 UX-метрики
+- Среднее число шагов уточнения
+- Drop-off по стадиям
+- Доля завершённой настройки credentials
+- Доля успешного восстановления после ошибок
+- CSAT / воспринимаемая полезность
 
-## 22.3 Technical metrics
-- Workflow generation success rate
-- Validation pass rate
-- Execution success rate
+## 22.3 Технические метрики
+- Доля успешной генерации workflow
+- Доля успешной валидации
+- Доля успешного исполнения
 - Retry rate
 - Timeout rate
 - Connector failure rate
 - p95 execution latency
 
-## 22.4 Trust metrics
+## 22.4 Метрики доверия
 - Evidence coverage rate
 - Human agreement score
 - Low-confidence rate
-- Override rate by expert reviewers
-- Abuse detection precision/recall
+- Override rate экспертами
+- Precision / recall детекции abuse
 - False positive block rate
 
-## 22.5 Platform metrics
-- Time to add new approved component
-- Time to add new source connector
-- Number of reusable templates
-- Custom component reuse rate
+## 22.5 Платформенные метрики
+- Время добавления нового approved-компонента
+- Время добавления нового source-коннектора
+- Число переиспользуемых шаблонов
+- Доля переиспользования кастомных компонентов
 - Backward compatibility incident rate
 
 ---
 
 ## 23. MVP Scope
 
-## 23.1 MVP included
+## 23.1 Включено в MVP
 - Task-first UI
 - Guided clarification
-- 1–2 core use cases:
+- 1–2 ключевых use case:
   - conversation analytics
   - recurring report
-- Source onboarding for selected sources
-- Automatic workflow generation
-- Langflow runtime integration
-- Sample-run and full-run
-- Validation and confidence display
-- Report/email delivery
-- Abuse/policy guard
-- Approved custom component support
-- Template save/reuse
+- Onboarding для выбранных источников
+- Автоматическая генерация workflow
+- Интеграция с Langflow runtime
+- Sample-run и full-run
+- Валидация и отображение confidence
+- Доставка отчёта / email
+- Abuse / policy guard
+- Поддержка approved кастомных компонентов
+- Сохранение / переиспользование шаблонов
 
-## 23.2 MVP excluded
-- Fully open-ended autonomous agents
-- Public marketplace
-- Unlimited arbitrary external integrations
-- Developer-grade arbitrary scripting by end users
-- Multi-runtime production deployment system
-
----
-
-## 24. Risks and Mitigations
-
-### Risk 1. Over-reliance on agentic planning
-**Mitigation:** deterministic compiler + validation + approved registry
-
-### Risk 2. User does not know how to formulate tasks
-**Mitigation:** guided clarification, templates, examples, task-first UX
-
-### Risk 3. Workflow builds but does not solve business problem
-**Mitigation:** semantic validation + evaluator + evidence + confidence
-
-### Risk 4. Component sprawl
-**Mitigation:** registry, approvals, contracts, deprecation policy
-
-### Risk 5. Security/PII issues
-**Mitigation:** policy engine, redaction, RBAC, audit, restricted connectors
-
-### Risk 6. Hard lock-in to Langflow
-**Mitigation:** runtime-neutral IR + compiler architecture
-
-### Risk 7. User mistrust
-**Mitigation:** evidence-backed outputs, confidence signaling, transparent limitations
-
-### Risk 8. Abuse and trolling
-**Mitigation:** policy & abuse guard, logging, blocking, escalation path
+## 23.2 Исключено из MVP
+- Полностью открытые автономные агенты
+- Публичный маркетплейс
+- Неограниченные произвольные внешние интеграции
+- Developer-grade произвольный скриптинг конечным пользователем
+- Multi-runtime production deployment
 
 ---
 
-## 25. Human Resources and Responsibility Model
+## 24. Риски и митигации
 
-## 25.1 Core team
+### Риск 1. Чрезмерная опора на агентное планирование
+**Митигация:** детерминированный компилятор + валидация + approved-реестр
+
+### Риск 2. Пользователь не умеет формулировать задачи
+**Митигация:** guided clarification, шаблоны, примеры, task-first UX
+
+### Риск 3. Workflow собирается, но не решает бизнес-задачу
+**Митигация:** семантическая валидация + evaluator + evidence + confidence
+
+### Риск 4. Разрастание компонентов (component sprawl)
+**Митигация:** реестр, approvals, контракты, deprecation-политика
+
+### Риск 5. Проблемы с безопасностью / PII
+**Митигация:** policy engine, редакция, RBAC, аудит, ограниченные коннекторы
+
+### Риск 6. Жёсткая привязка к Langflow
+**Митигация:** runtime-нейтральное IR + архитектура компилятора
+
+### Риск 7. Недоверие пользователя
+**Митигация:** evidence-подкреплённые outputs, сигналы confidence, прозрачные ограничения
+
+### Риск 8. Abuse и троллинг
+**Митигация:** policy & abuse guard, логирование, блокировки, эскалация
+
+---
+
+## 25. Человеческие ресурсы и модель ответственности
+
+## 25.1 Основная команда
 
 ### Product Manager / Product Owner
-**Responsibilities:**
-- product vision,
+**Ответственность:**
+- видение продукта,
 - JTBD,
-- prioritization,
-- KPI definition,
-- scope management,
-- final PRD ownership.
+- приоритизация,
+- определение KPI,
+- управление скоупом,
+- владение финальной версией PRD.
 
 ### Solution Architect
-**Responsibilities:**
-- end-to-end architecture,
-- control plane vs execution plane boundaries,
-- runtime-neutral workflow model,
-- scalability and integration strategy,
-- technical design integrity.
+**Ответственность:**
+- сквозная архитектура,
+- границы control plane vs execution plane,
+- runtime-нейтральная модель workflow,
+- стратегия масштабируемости и интеграции,
+- целостность технического дизайна.
 
 ### UX / Product Designer
-**Responsibilities:**
+**Ответственность:**
 - task-first UX,
-- wizard flows,
+- wizard-flows,
 - edge cases,
-- trolling/misuse UX,
-- explainability surfaces,
-- flow review UX,
-- operator/admin UX.
+- UX для троллинга / misuse,
+- поверхности объяснимости,
+- UX обзора flow,
+- UX оператора / администратора.
 
 ### AI / LLM Architect
-**Responsibilities:**
-- intent/clarification/planner/evaluator design,
-- boundaries of agentic behavior,
-- prompting/system behavior,
-- trust and semantic correctness layer.
+**Ответственность:**
+- дизайн intent / clarification / planner / evaluator,
+- границы агентного поведения,
+- prompting / поведение системы,
+- слой доверия и семантической корректности.
 
 ### Backend / Platform Engineer
-**Responsibilities:**
-- APIs,
-- orchestration,
-- metadata services,
-- versioning,
-- queues,
-- execution lifecycle,
-- integration with runtime and storage.
+**Ответственность:**
+- API,
+- оркестрация,
+- metadata-сервисы,
+- версионирование,
+- очереди,
+- жизненный цикл исполнения,
+- интеграция с runtime и хранилищем.
 
 ### Langflow / Workflow Engineer
-**Responsibilities:**
-- Langflow flow model,
-- execution integration,
+**Ответственность:**
+- модель flow в Langflow,
+- интеграция исполнения,
 - subflows,
-- custom components,
+- кастомные компоненты,
 - compiler targets,
-- runtime contracts.
+- runtime-контракты.
 
 ### Data / Analytics Engineer
-**Responsibilities:**
-- data ingestion,
-- connectors,
-- profiling,
-- transformations,
-- data reliability.
+**Ответственность:**
+- ingestion данных,
+- коннекторы,
+- профилирование,
+- трансформации,
+- надёжность данных.
 
 ### Evaluation / Applied Scientist
-**Responsibilities:**
-- validation framework,
-- quality benchmarks,
-- semantic correctness methodology,
-- evidence model,
-- confidence framework.
+**Ответственность:**
+- фреймворк валидации,
+- quality-бенчмарки,
+- методология семантической корректности,
+- модель evidence,
+- фреймворк confidence.
 
 ### Security / Privacy Engineer
-**Responsibilities:**
-- secrets,
+**Ответственность:**
+- секреты,
 - RBAC,
-- data classification,
-- audit requirements,
-- abuse policy,
-- connector/component approval constraints.
+- классификация данных,
+- требования аудита,
+- политика abuse,
+- ограничения approval для коннекторов / компонентов.
 
 ### DevOps / SRE
-**Responsibilities:**
-- deployment model,
-- runtime operations,
+**Ответственность:**
+- модель деплоя,
+- runtime-операции,
 - observability,
-- reliability,
+- надёжность,
 - scaling,
-- isolation.
+- изоляция.
 
-## 25.2 Extended experts
+## 25.2 Расширенные эксперты
 
-### Domain Expert (e.g., CX / Support / Ops)
-**Responsibilities:**
-- define useful outputs,
-- dissatisfaction taxonomy,
-- business relevance of insights,
-- review of final result usefulness.
+### Domain Expert (например, CX / Support / Ops)
+**Ответственность:**
+- определение полезных outputs,
+- таксономия недовольства,
+- бизнес-релевантность инсайтов,
+- проверка полезности финального результата.
 
 ### Solutions Engineer
-**Responsibilities:**
-- connector onboarding,
-- solution pattern documentation,
-- template packaging,
-- field feedback into platform design.
+**Ответственность:**
+- onboarding коннекторов,
+- документирование solution-паттернов,
+- упаковка шаблонов,
+- обратная связь «с поля» в дизайн платформы.
 
 ### Technical Writer / Enablement Lead
-**Responsibilities:**
-- user education,
-- task examples,
-- onboarding guides,
-- internal documentation,
+**Ответственность:**
+- обучение пользователей,
+- примеры задач,
+- onboarding-гайды,
+- внутренняя документация,
 - best practices.
 
-## 25.3 Suggested workstream ownership
+## 25.3 Предлагаемое распределение workstream-ов
 
-### Workstream A — UX & User Research
-Owner: PM + UX Designer  
+### Workstream A — UX и исследования пользователей
+Owner: PM + UX Designer
 Contributors: Domain Expert, Solutions Engineer
 
-### Workstream B — Architecture & Platform Design
-Owner: Solution Architect  
+### Workstream B — Архитектура и дизайн платформы
+Owner: Solution Architect
 Contributors: Backend Lead, Langflow Engineer, SRE
 
-### Workstream C — Agent/Planner/Evaluator Design
-Owner: AI Architect  
+### Workstream C — Дизайн Agent / Planner / Evaluator
+Owner: AI Architect
 Contributors: Applied Scientist, Backend, Langflow Engineer
 
-### Workstream D — Validation & Trust
-Owner: Applied Scientist  
+### Workstream D — Валидация и доверие
+Owner: Applied Scientist
 Contributors: AI Architect, Domain Expert, PM
 
-### Workstream E — Security & Governance
-Owner: Security Engineer  
-Contributors: Architect, Platform, Admin stakeholders
+### Workstream E — Security и governance
+Owner: Security Engineer
+Contributors: Architect, Platform, Admin-стейкхолдеры
 
-### Workstream F — Templates / Components / Integrations
-Owner: Langflow Engineer + Data Engineer  
+### Workstream F — Шаблоны / компоненты / интеграции
+Owner: Langflow Engineer + Data Engineer
 Contributors: Solutions Engineer, Architect
 
 ---
 
-## 26. Recommended Work Plan Before Implementation
+## 26. Рекомендуемый план работ до реализации
 
-### Phase 1 — Product framing
-- Define personas and JTBD
-- Select top 2–3 MVP use cases
-- Map user journeys and edge cases
-- Define success metrics
+### Фаза 1 — Продуктовое обрамление
+- Определение персон и JTBD
+- Выбор 2–3 ключевых use cases для MVP
+- Карта пользовательских путей и edge cases
+- Определение метрик успеха
 
-### Phase 2 — UX concept
-- Task-first information architecture
-- Wizard flows
-- Result and confidence surfaces
-- Admin/operator experiences
-- Trolling and error-state UX
+### Фаза 2 — UX-концепция
+- Task-first информационная архитектура
+- Wizard-flows
+- Поверхности результата и confidence
+- Опыт администратора / оператора
+- UX троллинга и error-state
 
-### Phase 3 — Architecture design
+### Фаза 3 — Проектирование архитектуры
 - Control plane / execution plane
 - Workflow IR
-- Registry model
-- Approval model
-- Data/security model
-- Langflow integration pattern
+- Модель registry
+- Модель approval
+- Модель данных / безопасности
+- Паттерн интеграции с Langflow
 
-### Phase 4 — Correctness and trust design
-- Validation framework
-- Semantic fit checks
-- Evidence model
-- Confidence model
-- Human-review insertion points
+### Фаза 4 — Проектирование корректности и доверия
+- Фреймворк валидации
+- Проверки semantic fit
+- Модель evidence
+- Модель confidence
+- Точки подключения human review
 
-### Phase 5 — Scalability and governance design
-- Component growth strategy
-- Custom component lifecycle
-- Template library model
-- Runtime scaling and scheduling
-- Audit and abuse policies
+### Фаза 5 — Проектирование масштабируемости и governance
+- Стратегия роста компонентов
+- Жизненный цикл кастомных компонентов
+- Модель библиотеки шаблонов
+- Runtime-масштабирование и расписание
+- Политики аудита и abuse
 
-### Phase 6 — Presentation and defense package
-Prepare:
-- executive story,
-- architecture diagrams,
-- user journeys,
-- decision log,
-- risk register,
-- responsibility map,
-- why-Langflow rationale,
-- correctness & trust model,
-- phased delivery strategy.
-
----
-
-## 27. Open Questions
-
-1. Which specific data sources are first-priority?
-2. Is closed perimeter / on-prem a hard MVP requirement?
-3. Which roles can approve custom components?
-4. Which use cases must be supported first besides conversation analytics?
-5. What kinds of output artifacts are mandatory in V1?
-6. Which connectors are allowed by policy from day one?
-7. What is the acceptable balance between automation and mandatory human approval?
-8. What actions, if any, are permitted beyond analysis and reporting?
+### Фаза 6 — Упаковка для презентации и защиты
+Подготовить:
+- executive-историю,
+- архитектурные диаграммы,
+- пользовательские сценарии,
+- журнал решений (decision log),
+- реестр рисков,
+- карту ответственности,
+- обоснование выбора Langflow,
+- модель correctness & trust,
+- фазовую стратегию поставки.
 
 ---
 
-## 28. Final Product Statement
+## 27. Открытые вопросы
 
-AI Copilot Platform for Langflow is a **task-first self-serve orchestration platform** that enables business users to describe a problem in natural language, receive guided help, generate and validate a correct workflow, execute it safely through Langflow, evaluate the trustworthiness of the result, and obtain a reusable business artifact — all within a scalable, governable, and extensible enterprise architecture.
+1. Какие источники данных первоочередные?
+2. Является ли on-prem / закрытый периметр обязательным требованием MVP?
+3. Какие роли могут одобрять кастомные компоненты?
+4. Какие use cases должны поддерживаться первыми помимо conversation analytics?
+5. Какие виды output-артефактов обязательны в V1?
+6. Какие коннекторы разрешены политикой с первого дня?
+7. Каков допустимый баланс между автоматизацией и обязательным human approval?
+8. Какие действия (если таковые есть) разрешены помимо анализа и отчётности?
 
 ---
 
-## Appendix A — Example task spec
+## 28. Финальное product statement
+
+AI Copilot Platform для Langflow — это **task-first self-serve платформа оркестрации**, которая позволяет бизнес-пользователям описать задачу на естественном языке, получить направляющую помощь, сгенерировать и валидировать корректный workflow, безопасно исполнить его через Langflow, оценить достоверность результата и получить переиспользуемый бизнес-артефакт — всё это в рамках масштабируемой, управляемой и расширяемой enterprise-архитектуры.
+
+---
+
+## Приложение A — Пример task spec
 
 ```json
 {
@@ -1245,7 +1245,7 @@ AI Copilot Platform for Langflow is a **task-first self-serve orchestration plat
 }
 ```
 
-## Appendix B — Example logical workflow
+## Приложение B — Пример логического workflow
 
 ```text
 Task Input
@@ -1269,15 +1269,15 @@ Task Input
 → Results / History / Template Save
 ```
 
-## Appendix C — Example custom component classes
+## Приложение C — Пример классов кастомных компонентов
 
-- Internal Dialog Source Connector
-- PII Redaction Component
-- Complaint Taxonomy Classifier
-- Evidence Linker
-- Trend Aggregator
-- Report Formatter
-- Policy Gate Component
-- Enterprise Email Delivery Component
-- Quality Evaluator Component
-- Secure Secret-Aware API Wrapper
+- Internal Dialog Source Connector (коннектор к внутреннему хранилищу диалогов)
+- PII Redaction Component (редакция PII)
+- Complaint Taxonomy Classifier (классификатор по таксономии жалоб)
+- Evidence Linker (линкер evidence)
+- Trend Aggregator (агрегатор трендов)
+- Report Formatter (форматтер отчётов)
+- Policy Gate Component (компонент-шлюз политик)
+- Enterprise Email Delivery Component (корпоративная доставка email)
+- Quality Evaluator Component (компонент оценки качества)
+- Secure Secret-Aware API Wrapper (безопасная обёртка API с учётом секретов)

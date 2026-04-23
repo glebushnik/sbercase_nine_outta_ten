@@ -198,11 +198,65 @@ Your work will directly influence the platform’s success, ensuring that the pl
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- Contributor to **Workstream A — UX & User Research** (owners: PM + UX Designer) — PRD §25.3.
+- Contributor to **Workstream D — Validation & Trust** — business-correctness ground truth.
+
+### 6.2 Core PRD responsibilities (§25.2)
+Per PRD §25.2, you own specifically:
+- define useful outputs,
+- **dissatisfaction taxonomy**,
+- business relevance of insights,
+- **review of final result usefulness** (business correctness level — PRD §18.2.4).
+
+### 6.3 Dissatisfaction taxonomy (PRD §25.2, §10.1)
+You own the domain taxonomy for the primary MVP use case — **conversation analytics** (§10.1). This includes:
+- Dissatisfaction categories (billing, wait time, product defect, agent behavior, etc. — tailored to the target domain).
+- Severity and urgency signals.
+- Escalation-worthy patterns.
+- Domain synonyms and phrasing variants that should map to the same category.
+
+This taxonomy feeds: Planner component selection, Complaint Taxonomy Classifier (see PRD Appendix C), Evaluator's semantic-fit checks, and Report Generator grouping.
+
+### 6.4 Business correctness review (PRD §18.2.4)
+You are the human reviewer for the **business correctness** level of the correctness framework. Specifically:
+- Does the output actually solve the business question?
+- Are the insights data-backed and actionable?
+- Are limitations honestly surfaced?
+- Is human review required for this class of output?
+
+Your review sets the ground-truth benchmark that Evaluation Scientist uses to calibrate semantic and business-correctness models.
+
+### 6.5 Useful outputs per use case (PRD §10)
+For each supported use case, define what a **useful** output looks like:
+- §10.1 Conversation analytics — dissatisfaction drivers, clustered themes, period comparisons, management-ready report.
+- §10.2 Document / corpus analysis — summarization, key insights, contradictions, trends.
+- §10.3 Operations monitoring — incident classification, recurring issues, weekly report, threshold alerts.
+- §10.4 Knowledge / support quality — top unresolved topics, pain points, escalations, internal digest.
+- §10.5 Scheduled business workflows — recurring reports, dashboards, digests.
+
+### 6.6 Abuse / manipulation signals (PRD §12.7)
+From your domain, flag phrasings that constitute content manipulation (e.g., "hide complaints", "make the week look better than it was"). These feed the Policy & Abuse Guard's classifier with Security and AI Architect.
+
+### 6.7 Key domain artifacts to maintain
+- Dissatisfaction taxonomy (versioned).
+- "Useful output" rubric per use case.
+- Business-correctness review checklist.
+- Domain synonym and phrasing dictionary for Intent Parser / Clarification Manager.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 You will collaborate closely with the following teams:
 
 - **Product Manager**: To define business requirements and prioritize features.
 - **UX/Product Designer**: To provide insights into user pain points and improve the user experience.
+- **Evaluation / Applied Scientist**: Ground truth for business correctness and benchmark labels.
+- **AI Architect**: Domain phrasing and synonyms for Intent Parser / Clarification Manager.
+- **Solutions Engineer**: Field observations and template packaging with domain alignment.
+- **Technical Writer**: Validate domain-accurate phrasing in user-facing content.
 - **Backend Engineers**: To ensure the platform can support business workflows.
 - **Support and Operations Teams**: To ensure proper training, documentation, and user support.

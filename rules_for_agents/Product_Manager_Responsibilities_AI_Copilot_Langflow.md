@@ -227,6 +227,46 @@ As Product Manager, you will work with the following teams to deliver the produc
 
 ---
 
-## 9. Conclusion
+## 9. PRD Alignment
+
+### 9.1 Workstream ownership
+- **Workstream A — UX & User Research** (co-owner with UX Designer; contributors: Domain Expert, Solutions Engineer) — PRD §25.3.
+- Contributor to **Workstream D — Validation & Trust** (driving business-relevance alignment).
+
+### 9.2 PRD ownership responsibilities
+Per PRD §25.1, you own specifically:
+- product vision,
+- Jobs To Be Done,
+- prioritization,
+- KPI definition,
+- scope management,
+- **final PRD ownership** — the living PRD is your artifact; updates, open-question resolution, and version control are yours.
+
+### 9.3 MVP scope stewardship
+Per PRD §23, you are the gatekeeper between MVP included and MVP excluded:
+- **Included:** task-first UI, guided clarification, 1–2 core use cases (conversation analytics + recurring report), source onboarding for selected sources, automatic workflow generation, Langflow runtime integration, sample/full run, validation & confidence display, report/email delivery, abuse/policy guard, approved custom component support, template save/reuse.
+- **Excluded from MVP:** fully open-ended autonomous agents, public marketplace, unlimited external integrations, developer-grade scripting by end users, multi-runtime production deployment.
+
+### 9.4 Open Questions ownership
+You own closure of PRD §27 open questions in collaboration with Architect, Security, and Domain Expert:
+1. First-priority data sources.
+2. On-prem / closed perimeter as MVP requirement.
+3. Approver roles for custom components.
+4. Additional MVP use cases beyond conversation analytics.
+5. Mandatory output artifacts in V1.
+6. Day-one policy-approved connectors.
+7. Automation vs mandatory human approval balance.
+8. Permitted actions beyond analysis/reporting.
+
+### 9.5 Success metrics to track (from PRD §22)
+- Self-serve completion rate (§22.1).
+- Time to first useful workflow (§22.1).
+- Conversion from request to executed workflow (§22.1).
+- Average number of clarification steps (§22.2).
+- Trust metrics: evidence coverage, low-confidence rate (§22.4).
+
+---
+
+## 10. Conclusion
 
 As the Product Manager for the **AI Copilot Platform**, you will be the champion of the product’s vision and success. By ensuring alignment across teams and keeping business needs at the forefront, you will drive the platform from ideation to full-scale implementation. Your leadership will shape the future of how business users interact with AI-powered workflow tools, providing them with the autonomy they need to drive business results without developer intervention.

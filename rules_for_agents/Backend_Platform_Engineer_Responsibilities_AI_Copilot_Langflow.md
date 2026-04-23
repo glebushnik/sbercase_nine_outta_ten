@@ -190,7 +190,44 @@ Your contributions will directly affect the platform’s ability to execute work
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- Contributor to **Workstream B — Architecture & Platform Design** (owner: Solution Architect) — PRD §25.3.
+- Contributor to Workstream C (Agent/Planner/Evaluator Design) on platform plumbing.
+
+### 6.2 Control-plane services you own (PRD §15.2, §17.5)
+- **Capability Registry / Metadata Service** — components, custom components, templates, versions, approvals, lineage, audit events (PRD §17.5).
+- **Task Spec lifecycle** services (create, version, resolve, persist) — backing the Task Spec Builder.
+- **Execution Orchestrator** — takes validated flow, dispatches to Langflow, manages traces and status.
+- **Template Service** and **Versioning & Metadata** service.
+- **Audit / Governance** storage and query layer.
+
+### 6.3 Execution-plane plumbing (PRD §15.2, §20.5)
+- **Queues / Workers / Async jobs** — every execution is dispatched through a queue.
+- **Schedulers** — for recurring workflows (PRD §12.8).
+- **Checkpointing** — resumable, reproducible runs (PRD §14.2, §20.5).
+- **Storage / Secrets / Runtime Logs** — secret access via vault (co-owned with Security).
+- **Caching** where appropriate, **resource budgets** per tenant.
+
+### 6.4 Versioning contract (PRD §14.5, §20.2, §20.4)
+Every first-class entity is versioned: workflows, templates, components, task specs, custom components. APIs must expose version, allow pinning, and respect deprecation policy. Backward-compatibility incident rate is a tracked metric (PRD §22.5).
+
+### 6.5 Runtime-neutral IR implementation (PRD §20.4)
+Persist and serve the runtime-neutral IR. Execution Orchestrator consumes IR, Workflow Compiler produces Langflow flows from IR. IR persistence is yours; IR design is co-owned with Architect.
+
+### 6.6 Reliability contract (PRD §14.2)
+Backend must provide: idempotent execution where feasible, retry strategy, timeout handling, partial failure recovery, last-known-good recovery, versioned reproducibility.
+
+### 6.7 Observability (PRD §14.6)
+Emit: structured logs, traces, execution lineage, quality metrics, failure taxonomies, audit and abuse events. Lineage links outputs back to task spec, plan, compiled flow, inputs, and traces.
+
+### 6.8 Tenant isolation (PRD §14.3, §21.1)
+Data, secrets, components, and audit logs are isolated per tenant / workspace. No cross-tenant leakage through caches, queues, or logs.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 You will collaborate closely with the following teams:
 
@@ -198,3 +235,8 @@ You will collaborate closely with the following teams:
 - **Product Manager**: To understand product requirements and ensure the backend supports the intended user workflows.
 - **UX / Product Designer**: To ensure that the backend integrates well with the front-end user experience.
 - **AI Architect**: To ensure the backend can support the AI-driven components, including task understanding and clarification.
+- **Langflow Engineer**: Compiler-to-Langflow integration and subflow/tool-flow orchestration boundaries.
+- **Data / Analytics Engineer**: Connector contracts, profiling integration, lineage capture.
+- **Evaluation / Applied Scientist**: Integrating evaluator hooks and confidence signals into execution lifecycle.
+- **Security / Privacy Engineer**: Secrets vault, tenant isolation, audit log integrity.
+- **DevOps / SRE**: Queue infrastructure, scheduling, scaling, checkpoint storage.

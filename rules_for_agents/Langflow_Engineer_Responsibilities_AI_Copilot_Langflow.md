@@ -189,12 +189,49 @@ You will also play a key role in optimizing Langflow’s performance, maintainin
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- **Workstream F — Templates / Components / Integrations** (co-owner with Data Engineer; contributors: Solutions Engineer, Architect) — PRD §25.3.
+- Contributor to Workstream B (Architecture) and Workstream C (Agent/Planner/Evaluator Design).
+
+### 6.2 Workflow Compiler (PRD §16.4, §17.5)
+You own the **compiler targets**. The compiler pipeline:
+1. Planner produces blueprint from task spec + registry.
+2. Compiler selects approved standard + custom components.
+3. Compiler builds **runtime-neutral IR** (nodes, edges, contracts, policies, versioning, evaluator hooks, delivery/scheduling metadata — PRD §20.4).
+4. Compiler emits **Langflow-compatible flow** from IR.
+5. Validation runs on both IR and runtime readiness (PRD §18.3).
+6. Flow executes in Langflow runtime; traces flow back to control plane.
+
+You must preserve the IR boundary so a future compiler-to-other-runtime is achievable (Risk 6 mitigation, PRD §24).
+
+### 6.3 Subflows and tool-flows (PRD §15.2)
+Design and maintain subflows / tool-flows as first-class composition units so the Planner and Compiler can reuse complex patterns without regenerating primitives.
+
+### 6.4 Runtime contracts (PRD §16.5, §25.1)
+Every Langflow component (standard or custom) exposes a strict contract: input schema, output schema, config schema, secret dependencies, side effects, error taxonomy, observability hooks. The runtime contract is what Validation Engine and Compiler rely on.
+
+### 6.5 Custom component requirements (PRD §16.5)
+Every custom component must carry: **owner, description, input contract, output contract, config schema, secrets requirements, risk classification, approval status, tests, versioning, observability hooks**. Enforce this at registration; reject non-compliant submissions.
+
+### 6.6 Approved-only by default (PRD §13.5, §13.11)
+The Planner may compose only **approved** components by default. Unapproved custom components require explicit admin-approved override and leave an audit trail. Approval pipeline co-owned with Security and Architect.
+
+### 6.7 Why not "just build everything in Langflow" (PRD §16.3)
+Remember the boundary: user intent understanding ≠ flow execution; validation and governance require separate logic; platform scaling requires registry, contracts, approvals; Langflow is the orchestration substrate, not the product.
+
+---
+
+## 7. Human Resources and Responsibilities
 
 You will work closely with the following teams:
 
-- **Backend Engineers**: To ensure proper integration between the backend platform and Langflow.
-- **AI Architect**: To integrate AI-driven components into Langflow.
-- **Solution Architect**: To ensure Langflow’s integration aligns with the overall system architecture.
+- **Backend Engineers**: To ensure proper integration between the backend platform and Langflow, including Execution Orchestrator and IR persistence.
+- **AI Architect**: To integrate Planner output into compiler input; keep agentic-to-deterministic boundary clean.
+- **Solution Architect**: To ensure Langflow's integration aligns with the overall system architecture and IR design.
+- **Data / Analytics Engineer**: Co-owner of Workstream F; co-design connector and transformation components.
+- **Evaluation / Applied Scientist**: Expose evaluator hooks in compiled flows.
 - **Product Manager**: To understand business needs and ensure the workflows meet user requirements.
-- **Security Experts**: To ensure that custom components adhere to security and privacy policies.
+- **Solutions Engineer**: To package field-proven flows as reusable templates.
+- **Security Experts**: To ensure that custom components adhere to security and privacy policies via the approval pipeline.

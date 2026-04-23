@@ -170,11 +170,68 @@ Your work will directly impact the platform’s ability to evaluate, explain, an
 
 ---
 
-## 6. Human Resources and Responsibilities
+## 6. PRD Alignment
+
+### 6.1 Workstream ownership
+- **Workstream D — Validation & Trust** (owner; contributors: AI Architect, Domain Expert, PM) — PRD §25.3.
+- Contributor to Workstream C (Agent/Planner/Evaluator Design).
+
+### 6.2 Four levels of correctness (PRD §18.2) — all are yours
+You are responsible for defining methodology and instrumentation for **all four levels**:
+
+1. **Structural correctness** — graph validity, required inputs/parameters, input/output contract compatibility, component-combination admissibility.
+2. **Execution correctness** — ability to execute, sample-run success, runtime stability, retry/timeout behavior, output schema validity.
+3. **Semantic correctness** — workflow actually solves the user's task; requested dimensions/outputs are present (e.g., "trends" means trends, not generic summary).
+4. **Business correctness** — result is usable for the business question; conclusions are data-backed; confidence present; limitations surfaced; human review assigned when needed.
+
+### 6.3 Required validation stages (PRD §18.3)
+Seven stages must be implemented and pass in order:
+1. Task understanding validation.
+2. Spec sanity validation.
+3. Workflow structural validation.
+4. Data readiness validation (consumes Data Engineer's readiness report).
+5. Sample-run validation.
+6. Semantic result validation.
+7. Final report confidence gate.
+
+### 6.4 Evidence model (PRD §18.4)
+Every significant output carries, where applicable:
+- evidence examples,
+- counts or coverage,
+- source mapping,
+- confidence signal,
+- limitation note.
+
+Design evidence schema and enforce it in Report Generator output.
+
+### 6.5 Handling low-confidence outputs (PRD §18.5)
+When confidence falls below the threshold (per task spec's `confidence_threshold` — Appendix A):
+- Do not mask.
+- Show cause: sparse data, noisy data, conflicting evidence, unstable clustering, weak task linkage.
+- Offer actions: refine task, improve source, adjust analysis, human review, narrow scope.
+
+### 6.6 Trust metrics to instrument (PRD §22.4)
+- Evidence coverage rate.
+- Human agreement score.
+- Low-confidence rate.
+- Override rate by expert reviewers.
+- Abuse detection precision/recall (co-owned with Security/AI Architect).
+- False-positive block rate.
+
+### 6.7 Quality benchmarks
+Maintain labeled benchmarks per supported use case (PRD §10) covering semantic fit, evidence quality, and business usefulness (with Domain Expert).
+
+---
+
+## 7. Human Resources and Responsibilities
 
 You will collaborate closely with the following teams:
 
-- **AI Architect**: To ensure the evaluation system integrates smoothly with AI-driven workflows.
+- **AI Architect**: Co-owner of Evaluator/Critic component; agentic-layer boundaries.
 - **Product Manager**: To align the evaluation framework with business objectives and user needs.
-- **Backend Engineers**: To integrate the evaluation system into the platform’s backend and ensure its scalability.
-- **UX/Product Designer**: To ensure that the evaluation results are presented in an understandable and user-friendly manner.
+- **Backend Engineers**: To integrate the evaluation system into the platform's backend and ensure its scalability.
+- **UX/Product Designer**: To ensure that confidence, evidence, and limitations are surfaced correctly (PRD §11, §18.5).
+- **Data / Analytics Engineer**: Consume data quality signals (coverage, noise, drift) from profiling layer.
+- **Langflow Engineer**: Evaluator hooks embedded into compiled flows.
+- **Domain Expert**: Validate business-correctness heuristics and benchmark ground truth.
+- **Security / Privacy Engineer**: Co-instrument abuse detection precision/recall.
